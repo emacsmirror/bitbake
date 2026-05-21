@@ -175,11 +175,11 @@ Should be a format string with one '\\=%s' directive for a variable name."
 
 (defun bitbake-read-poky-directory ()
   "Read the poky directory."
-  (read-directory-name "Poky directory" bitbake-poky-directory bitbake-poky-directory))
+  (read-directory-name "Poky directory: " bitbake-poky-directory bitbake-poky-directory))
 
 (defun bitbake-read-build-directory ()
   "Read the build directory."
-  (read-directory-name "Build directory" bitbake-build-directory bitbake-build-directory))
+  (read-directory-name "Build directory: " bitbake-build-directory bitbake-build-directory))
 
 (defun bitbake-wait-for-prompt ()
   "Wait for BITBAKE-BUFFER-PROMPT to appear in current buffer."

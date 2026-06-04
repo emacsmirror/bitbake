@@ -827,9 +827,13 @@ For detail, see `comment-dwim'."
   "Syntax table used in `bitbake-mode'.")
 
 (defvar bitbake-font-lock-defaults
-  `((
+  `((;; addtask x before y after z
+     ("^\\(addtask\\)"
+      (0 font-lock-keyword-face)
+      ("\\_<\\(before\\|after\\)\\_>"
+       nil nil (0 font-lock-keyword-face)))
      ;; fakeroot python do_foo() {
-     ("\\b\\(include\\(_all\\)?\\|require\\|inherit\\(_defer\\)?\\|python\\|addtask\\|export\\|fakeroot\\|unset\\)\\b" . font-lock-keyword-face)
+     ("\\b\\(include\\(_all\\)?\\|require\\|inherit\\(_defer\\)?\\|python\\|deltask\\|export\\|fakeroot\\|unset\\)\\b" . font-lock-keyword-face)
      ;; do_install_append() {
      ("^\\(fakeroot *\\)?\\(python *\\)?\\([a-zA-Z0-9\-_+.${}/~:]+\\) *( *) *{" 3 font-lock-function-name-face)
      ;; do_deploy[depends] ??=

@@ -833,7 +833,7 @@ For detail, see `comment-dwim'."
       ("\\_<\\(before\\|after\\)\\_>"
        nil nil (0 font-lock-keyword-face)))
      ;; fakeroot python do_foo() {
-     ("\\b\\(include\\(_all\\)?\\|require\\|inherit\\(_defer\\)?\\|python\\|deltask\\|export\\|fakeroot\\|unset\\)\\b" . font-lock-keyword-face)
+     ("\\_<\\(include\\(_all\\)?\\|require\\|inherit\\(_defer\\)?\\|python\\|deltask\\|export\\|fakeroot\\|unset\\)\\_>" . font-lock-keyword-face)
      ;; do_install_append() {
      ("^\\(fakeroot *\\)?\\(python *\\)?\\([a-zA-Z0-9\-_+.${}/~:]+\\) *( *) *{" 3 font-lock-function-name-face)
      ;; do_deploy[depends] ??=

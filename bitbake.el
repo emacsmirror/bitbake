@@ -832,10 +832,16 @@ For detail, see `comment-dwim'."
       (0 font-lock-keyword-face)
       ("\\_<\\(before\\|after\\)\\_>"
        nil nil (0 font-lock-keyword-face)))
+     ;; anonymous python
+     ("\\(python\\) *( *) *{"
+      1 font-lock-keyword-face)
      ;; fakeroot python do_foo() {
-     ("\\_<\\(include\\(_all\\)?\\|require\\|inherit\\(_defer\\)?\\|python\\|deltask\\|export\\|fakeroot\\|unset\\)\\_>" . font-lock-keyword-face)
-     ;; do_install_append() {
-     ("^\\(fakeroot *\\)?\\(python *\\)?\\([a-zA-Z0-9\-_+.${}/~:]+\\) *( *) *{" 3 font-lock-function-name-face)
+     ("^\\(fakeroot *\\)?\\(python *\\)?\\([a-zA-Z0-9\-_+.${}/~:]+\\) *( *) *{"
+      (1 '(face font-lock-keyword-face) nil t)
+      (2 '(face font-lock-keyword-face) nil t)
+      (3 '(face font-lock-function-name-face)))
+     ;; other keywords
+     ("^\\(include\\(_all\\)?\\|require\\|inherit\\(_defer\\)?\\|deltask\\|export\\|unset\\)\\_>" . font-lock-keyword-face)
      ;; do_deploy[depends] ??=
      ("^\\(export *\\)?\\([a-zA-Z0-9\-_+.${}/~]+\\(\\[[a-zA-Z0-9\-_+.${}/~]+\\]\\)?\\(:[a-zA-Z0-9\-_+.${}/~]+\\)*\\) *\\(=\\|\\?=\\|\\?\\?=\\|:=\\|+=\\|=+\\|.=\\|=.\\)" 2 font-lock-variable-name-face)
      )))

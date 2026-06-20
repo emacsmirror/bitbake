@@ -188,7 +188,7 @@ Should be a format string with one '\\=%s' directive for a variable name."
       (beginning-of-line)
       (setq bol (point)))
     (while (not (search-backward bitbake-buffer-prompt bol t))
-      (sleep-for 0 300))
+      (sleep-for 0.3))
     (goto-char (process-mark (get-buffer-process (current-buffer))))))
 
 (defun bitbake-buffer ()
@@ -429,8 +429,9 @@ If FETCH is non-nil, invalidate cache and fetch the recipes list again."
 
 If FETCH is non-nil, invalidate cache and fetch the tasks again."
   (when (or fetch (not (assoc recipe bitbake-recipe-tasks-cache)))
-    (assq-delete-all recipe bitbake-recipe-tasks-cache)
-    (setq bitbake-recipe-tasks-cache (cons (list recipe (bitbake-fetch-recipe-tasks recipe)) bitbake-recipe-tasks-cache)))
+    (setq bitbake-recipe-tasks-cache
+          (cons (list recipe (bitbake-fetch-recipe-tasks recipe))
+                (assq-delete-all recipe bitbake-recipe-tasks-cache))))
   (cadr (assoc recipe bitbake-recipe-tasks-cache)))
 
 (defun bitbake-read-tasks (recipe)
@@ -467,8 +468,9 @@ If FETCH is non-nil, invalidate cache and fetch the tasks again."
 
 If FETCH is non-nil, invalidate cache and fetch the variables again."
   (when (or fetch (not (assoc recipe bitbake-recipe-variables-cache)))
-    (assq-delete-all recipe bitbake-recipe-variables-cache)
-    (setq bitbake-recipe-variables-cache (cons (list recipe (bitbake-fetch-recipe-variables recipe)) bitbake-recipe-variables-cache)))
+    (setq bitbake-recipe-variables-cache
+          (cons (list recipe (bitbake-fetch-recipe-variables recipe))
+                (assq-delete-all recipe bitbake-recipe-variables-cache))))
   (cadr (assoc recipe bitbake-recipe-variables-cache)))
 
 (defun bitbake-recipe-variable (variable recipe &optional fetch)
@@ -669,11 +671,10 @@ If FORCE is non-nil, force rebuild of image,"
                      (bitbake-read-image)))
   (let ((rootfs (bitbake-recipe-variable "IMAGE_ROOTFS" image))
         (kernel (bitbake-recipe-variable "STAGING_KERNEL_DIR" image))
-        (hdddir (bitbake-recipe-variable "HDDDIR" image))
+        (_hdddir (bitbake-recipe-variable "HDDDIR" image))
         (staging-data (bitbake-recipe-variable "STAGING_DATADIR" image))
         (native-sysroot (bitbake-recipe-variable "STAGING_DIR_NATIVE" image))
-        (deploy (bitbake-recipe-variable "DEPLOY_DIR_IMAGE" image))
-        (last-prompt (process-mark (get-buffer-process (bitbake-buffer)))))
+        (deploy (bitbake-recipe-variable "DEPLOY_DIR_IMAGE" image)))
     (bitbake-command
       (bitbake-shell-command (format "wic create %s -r %s -b %s -k %s -n %s -o %s"
                                      wks rootfs staging-data kernel native-sysroot deploy)))

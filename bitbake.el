@@ -918,7 +918,7 @@ To use a specific version of the reference manual, customize `bitbake-yocto-manu
     :case-fold-search nil
     :front ,bitbake-python-def-regex
     :include-front t
-    :back "\\(^[^[:space:]\n]\\)")))
+    :back "\\(^[^[:space:]\n]\\|\\'\\)")))
 
 (defconst bitbake-mode-file-regex "\\.\\(bb\\(append\\|class\\)?\\|inc\\)\\'")
 

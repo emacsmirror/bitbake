@@ -1,10 +1,4 @@
-
-# Maintainer needed
-
-I've not used bitbake in a long time and I do not expect this to change soon. I don't have an environment to test new PRs so this project is not really maintained any more. If anybody who uses bitbake regularly wants to take over, just ask!
-
 # bitbake.el - Bitbake integration with emacs
-
 
 This package provides integration of the Yocto Bitbake tool with
 emacs. Its main features are:
@@ -72,17 +66,21 @@ Finally, you should get syntax highlighting when editing bitbake
 recipe files. It uses `mmm-mode` to provide python and shell support
 in tasks.
 
+`C-c C-f` in `bitbake-mode` looks up Yocto documentation for a given
+variable with `browse-url`.
+
 ## Development
 
 Development is done on
-[GitHub](https://github.com/canatella/bitbake-el). Any bugs or patches
+[GitHub](https://github.com/danielcmccarthy/bitbake-el). Any bugs or patches
 are welcome.
 
 ## Contributors
 
 Thanks to
 
-- Lee Yen-Chin for helping me updating the code to support Melpa and
+- Damien Merenne for creating this project and maintaining it for years.
+- Lee Yen-Chin for helping to update the code to support Melpa and
   publishing it,
 - Syohei Yoshida for small fixes,
 - Brian Malehorn for font-lock enhancement.
